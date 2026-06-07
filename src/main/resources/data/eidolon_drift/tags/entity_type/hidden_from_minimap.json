@@ -1,0 +1,7 @@
+{
+  "_comment": "Eidolon Drift — entities that must never be plotted on a minimap/world-map. The hard guarantee is per-player tracking (ObserverEntity#broadcastToPlayer): the Observer is not sent to non-target clients at all, so it cannot leak onto their maps. This tag is the integration hook for minimap mods to also hide it on the target's own client (M9 compat pass).",
+  "replace": false,
+  "values": [
+    "eidolon_drift:observer"
+  ]
+}

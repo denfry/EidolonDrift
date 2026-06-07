@@ -25,6 +25,8 @@ public final class ModSounds {
     public static final DeferredHolder<SoundEvent, SoundEvent> HOUSE_CREAK = register("house_creak");
     /** A low cave drone that should not be there. */
     public static final DeferredHolder<SoundEvent, SoundEvent> CAVE_RESONANCE = register("cave_resonance");
+    /** A faint directional tone from where the Observer is about to be (IMPLIED phase, GDD §8). */
+    public static final DeferredHolder<SoundEvent, SoundEvent> OBSERVER_TONE = register("observer_tone");
 
     private ModSounds() {}
 

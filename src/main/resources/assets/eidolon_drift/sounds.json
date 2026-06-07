@@ -18,5 +18,9 @@
   "cave_resonance": {
     "sounds": [{ "name": "eidolon_drift:cave/resonance", "volume": 0.7, "attenuation_distance": 24 }],
     "subtitle": "subtitles.eidolon_drift.cave_resonance"
+  },
+  "observer_tone": {
+    "sounds": [{ "name": "eidolon_drift:ambient/observer_tone", "volume": 0.5, "attenuation_distance": 48 }],
+    "subtitle": "subtitles.eidolon_drift.observer_tone"
   }
 }

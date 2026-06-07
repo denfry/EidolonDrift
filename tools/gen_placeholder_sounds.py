@@ -93,12 +93,24 @@ def cave_resonance():
     return _norm(_fade(sig * swell, 0.2, 0.4), 0.7)
 
 
+def observer_tone():
+    """A thin, detuned watching tone with slow tremolo — directional, far (~1.8 s)."""
+    t = _t(1.8)
+    sig = (np.sin(2 * np.pi * 210 * t)
+           + 0.7 * np.sin(2 * np.pi * 213 * t)   # close detune → slow beating
+           + 0.3 * np.sin(2 * np.pi * 420 * t))
+    trem = 0.6 + 0.4 * np.sin(2 * np.pi * 2.5 * t)
+    swell = np.sin(np.pi * t / t[-1]) ** 1.5      # fades in and out, no hard onset
+    return _norm(_fade(sig * trem * swell, 0.25, 0.4), 0.5)
+
+
 SOUNDS = {
     "ambient/step_behind.ogg": step_behind,
     "ambient/whisper.ogg": whisper,
     "ambient/distant_voice.ogg": distant_voice,
     "house/creak.ogg": creak,
     "cave/resonance.ogg": cave_resonance,
+    "ambient/observer_tone.ogg": observer_tone,
 }
 
 

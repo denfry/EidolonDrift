@@ -6,6 +6,15 @@
   "subtitles.eidolon_drift.distant_voice": "A distant voice",
   "subtitles.eidolon_drift.house_creak": "The house settles",
   "subtitles.eidolon_drift.cave_resonance": "The stone resonates",
+  "subtitles.eidolon_drift.observer_tone": "A tone, watching",
+
+  "entity.eidolon_drift.observer": "Observer",
+
+  "command.eidolon_drift.observer.spawned": "Observer set to phase: %s",
+  "command.eidolon_drift.observer.cleared": "Observer cleared.",
+  "command.eidolon_drift.observer.none": "No Observer present.",
+  "command.eidolon_drift.observer.info": "Observer: %s",
+  "command.eidolon_drift.observer.bad_phase": "Unknown phase: %s",
 
   "command.eidolon_drift.status.header": "— Eidolon Drift status —",
   "command.eidolon_drift.status.stage": "Stage: %s",

@@ -6,6 +6,7 @@ import com.denfry.eidolondrift.config.ModConfig;
 import com.denfry.eidolondrift.director.AnomalyDirector;
 import com.denfry.eidolondrift.mind.MindStateManager;
 import com.denfry.eidolondrift.network.EidolonNetworking;
+import com.denfry.eidolondrift.observer.ObserverSpawnManager;
 import com.denfry.eidolondrift.util.SoundScheduler;
 import com.denfry.eidolondrift.registry.ModBlocks;
 import com.denfry.eidolondrift.registry.ModDataAttachments;
@@ -52,6 +53,7 @@ public class EidolonDrift {
 
         // Network payloads register on the mod bus via RegisterPayloadHandlersEvent.
         modBus.addListener(EidolonNetworking::registerPayloads);
+        modBus.addListener(ModEntities::onCreateAttributes);
         modBus.addListener(this::commonSetup);
 
         // Commands register on the game event bus, not the mod bus.
@@ -61,6 +63,7 @@ public class EidolonDrift {
         NeoForge.EVENT_BUS.register(MindStateManager.class);
         NeoForge.EVENT_BUS.register(AnomalyDirector.class);
         NeoForge.EVENT_BUS.register(SoundScheduler.class);
+        NeoForge.EVENT_BUS.register(ObserverSpawnManager.class);
 
         LOGGER.info("Eidolon Drift bootstrapped. The house is listening.");
     }

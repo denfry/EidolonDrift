@@ -8,6 +8,8 @@ import com.denfry.eidolondrift.director.AnomalyRegistry;
 import com.denfry.eidolondrift.memory.PlayerWorldMemory;
 import com.denfry.eidolondrift.mind.MindState;
 import com.denfry.eidolondrift.mind.MindStateManager;
+import com.denfry.eidolondrift.observer.ObserverPhase;
+import com.denfry.eidolondrift.observer.ObserverSpawnManager;
 import com.mojang.brigadier.CommandDispatcher;
 import com.mojang.brigadier.arguments.FloatArgumentType;
 import com.mojang.brigadier.arguments.IntegerArgumentType;
@@ -46,6 +48,10 @@ public final class EidolonCommand {
     private static final SuggestionProvider<CommandSourceStack> ANOMALY_SUGGESTIONS =
             (ctx, b) -> SharedSuggestionProvider.suggest(
                     AnomalyRegistry.all().stream().map(a -> a.id().toString()), b);
+    private static final SuggestionProvider<CommandSourceStack> PHASE_SUGGESTIONS =
+            (ctx, b) -> SharedSuggestionProvider.suggest(
+                    java.util.Arrays.stream(ObserverPhase.values())
+                            .map(p -> p.name().toLowerCase(Locale.ROOT)), b);
 
     private EidolonCommand() {}
 
@@ -86,6 +92,22 @@ public final class EidolonCommand {
                                 .executes(c -> anomaly(c, self(c)))
                                 .then(Commands.argument("player", EntityArgument.player())
                                         .executes(c -> anomaly(c, EntityArgument.getPlayer(c, "player"))))))
+                .then(Commands.literal("observer")
+                        .then(Commands.literal("spawn")
+                                .executes(c -> observerSpawn(c, self(c), null))
+                                .then(Commands.argument("phase", StringArgumentType.word()).suggests(PHASE_SUGGESTIONS)
+                                        .executes(c -> observerSpawn(c, self(c), StringArgumentType.getString(c, "phase")))
+                                        .then(Commands.argument("player", EntityArgument.player())
+                                                .executes(c -> observerSpawn(c, EntityArgument.getPlayer(c, "player"),
+                                                        StringArgumentType.getString(c, "phase"))))))
+                        .then(Commands.literal("clear")
+                                .executes(c -> observerClear(c, self(c)))
+                                .then(Commands.argument("player", EntityArgument.player())
+                                        .executes(c -> observerClear(c, EntityArgument.getPlayer(c, "player")))))
+                        .then(Commands.literal("info")
+                                .executes(c -> observerInfo(c, self(c)))
+                                .then(Commands.argument("player", EntityArgument.player())
+                                        .executes(c -> observerInfo(c, EntityArgument.getPlayer(c, "player"))))))
                 .then(Commands.literal("reload").executes(EidolonCommand::reload)));
     }
 
@@ -167,6 +189,39 @@ public final class EidolonCommand {
         String ids = AnomalyRegistry.all().stream().map(a -> a.id().getPath()).collect(Collectors.joining(", "));
         c.getSource().sendSuccess(() -> Component.translatable("command.eidolon_drift.anomaly.list",
                 AnomalyRegistry.size(), ids), false);
+        return 1;
+    }
+
+    private static int observerSpawn(CommandContext<CommandSourceStack> c, ServerPlayer p, String phaseArg) {
+        if (p == null) return noTarget(c);
+        ObserverPhase phase = ObserverPhase.PERIPHERAL;
+        if (phaseArg != null) {
+            try {
+                phase = ObserverPhase.valueOf(phaseArg.toUpperCase(Locale.ROOT));
+            } catch (IllegalArgumentException e) {
+                c.getSource().sendFailure(Component.translatable("command.eidolon_drift.observer.bad_phase", phaseArg));
+                return 0;
+            }
+        }
+        ObserverPhase live = ObserverSpawnManager.debugSpawn(p, phase);
+        final ObserverPhase shown = live;
+        c.getSource().sendSuccess(() -> Component.translatable(
+                "command.eidolon_drift.observer.spawned", shown.name().toLowerCase(Locale.ROOT)), true);
+        return 1;
+    }
+
+    private static int observerClear(CommandContext<CommandSourceStack> c, ServerPlayer p) {
+        if (p == null) return noTarget(c);
+        boolean had = ObserverSpawnManager.debugClear(p);
+        c.getSource().sendSuccess(() -> Component.translatable(
+                had ? "command.eidolon_drift.observer.cleared" : "command.eidolon_drift.observer.none"), true);
+        return 1;
+    }
+
+    private static int observerInfo(CommandContext<CommandSourceStack> c, ServerPlayer p) {
+        if (p == null) return noTarget(c);
+        String info = ObserverSpawnManager.debugInfo(p);
+        c.getSource().sendSuccess(() -> Component.translatable("command.eidolon_drift.observer.info", info), false);
         return 1;
     }
 

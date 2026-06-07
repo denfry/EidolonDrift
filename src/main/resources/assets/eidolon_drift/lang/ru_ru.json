@@ -6,6 +6,15 @@
   "subtitles.eidolon_drift.distant_voice": "Далёкий голос",
   "subtitles.eidolon_drift.house_creak": "Дом оседает",
   "subtitles.eidolon_drift.cave_resonance": "Камень резонирует",
+  "subtitles.eidolon_drift.observer_tone": "Тон, наблюдающий",
+
+  "entity.eidolon_drift.observer": "Наблюдатель",
+
+  "command.eidolon_drift.observer.spawned": "Наблюдатель переведён в фазу: %s",
+  "command.eidolon_drift.observer.cleared": "Наблюдатель убран.",
+  "command.eidolon_drift.observer.none": "Наблюдателя нет.",
+  "command.eidolon_drift.observer.info": "Наблюдатель: %s",
+  "command.eidolon_drift.observer.bad_phase": "Неизвестная фаза: %s",
 
   "command.eidolon_drift.status.header": "— Состояние Eidolon Drift —",
   "command.eidolon_drift.status.stage": "Стадия: %s",

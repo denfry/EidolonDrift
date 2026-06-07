@@ -46,6 +46,12 @@ public final class MindStateManager {
         set(player, ms);
     }
 
+    public static void addSuspicion(ServerPlayer player, float amount) {
+        MindState ms = get(player);
+        ms.addSuspicion(amount);
+        set(player, ms);
+    }
+
     // ── events ──────────────────────────────────────────────────────────────────
 
     @SubscribeEvent
