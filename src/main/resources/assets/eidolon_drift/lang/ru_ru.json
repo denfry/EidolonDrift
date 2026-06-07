@@ -1,0 +1,8 @@
+{
+  "_comment": "Eidolon Drift — Русский. Каждая строка дублируется здесь и в en_us.json.",
+
+  "command.eidolon_drift.status.header": "— Состояние Eidolon Drift —",
+  "command.eidolon_drift.status.stage": "Стадия: %s",
+  "command.eidolon_drift.reload.success": "Конфигурация Eidolon Drift перезагружена.",
+  "command.eidolon_drift.not_available": "Состояние Eidolon Drift пока недоступно."
+}

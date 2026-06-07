@@ -1,0 +1,8 @@
+{
+  "_comment": "Eidolon Drift — English (US). Every user-facing string lives here AND in ru_ru.json.",
+
+  "command.eidolon_drift.status.header": "— Eidolon Drift status —",
+  "command.eidolon_drift.status.stage": "Stage: %s",
+  "command.eidolon_drift.reload.success": "Eidolon Drift config reloaded.",
+  "command.eidolon_drift.not_available": "Eidolon Drift state is not available yet."
+}

@@ -1,0 +1,33 @@
+# Eidolon Drift — NeoForge mod metadata.
+# NOTE: this is a TEMPLATE. Placeholders are interpolated from gradle.properties by the
+# generateModMetadata task. Edit values in gradle.properties, not here.
+
+modLoader = "javafml"
+loaderVersion = "${loader_version_range}"
+license = "${mod_license}"
+issueTrackerURL = "https://github.com/denfry/eidolon-drift/issues"
+
+[[mods]]
+modId = "${mod_id}"
+version = "${mod_version}"
+displayName = "${mod_name}"
+authors = "${mod_authors}"
+description = '''
+${mod_description}
+'''
+
+# Dependency: NeoForge loader itself.
+[[dependencies."${mod_id}"]]
+modId = "neoforge"
+type = "required"
+versionRange = "${neo_version_range}"
+ordering = "NONE"
+side = "BOTH"
+
+# Dependency: Minecraft version.
+[[dependencies."${mod_id}"]]
+modId = "minecraft"
+type = "required"
+versionRange = "${minecraft_version_range}"
+ordering = "NONE"
+side = "BOTH"

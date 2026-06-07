@@ -1,0 +1,32 @@
+# Gradle
+.gradle/
+build/
+out/
+classes/
+
+# IDEA / Eclipse
+.idea/
+*.iml
+*.ipr
+*.iws
+.classpath
+.project
+.settings/
+bin/
+
+# NeoForge / ModDevGradle dev runs
+run/
+runs/
+run-data/
+logs/
+
+# OS
+.DS_Store
+Thumbs.db
+
+# scratch
+server_run.log
+docs/_gdd_extracted.txt
+
+# Local Claude settings
+.claude/settings.local.json
