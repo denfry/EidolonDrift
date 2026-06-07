@@ -3,6 +3,7 @@ package com.denfry.eidolondrift;
 import com.denfry.eidolondrift.anomaly.ModAnomalies;
 import com.denfry.eidolondrift.anomaly.world.BedRefusesSleepAnomaly;
 import com.denfry.eidolondrift.command.EidolonCommand;
+import com.denfry.eidolondrift.compat.ModIntegrations;
 import com.denfry.eidolondrift.config.ModConfig;
 import com.denfry.eidolondrift.director.AnomalyDirector;
 import com.denfry.eidolondrift.mind.MindStateManager;
@@ -75,6 +76,8 @@ public class EidolonDrift {
     private void commonSetup(final FMLCommonSetupEvent event) {
         // Anomalies self-register into the Director's registry (Director never imports them).
         event.enqueueWork(ModAnomalies::bootstrap);
+        // Detect installed optional partner mods once (soft deps; no-op when absent).
+        event.enqueueWork(ModIntegrations::detect);
     }
 
     /**

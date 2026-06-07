@@ -34,6 +34,11 @@
   "command.eidolon_drift.home.line": "якорь %s · зона %s³ · порча %s",
   "command.eidolon_drift.home.cleared": "Активные клиентские аномалии очищены.",
   "command.eidolon_drift.no_target": "Нет цели; укажите игрока (например /eidolon status <player>).",
+  "command.eidolon_drift.integrations.header": "— Опциональные интеграции с модами —",
+  "command.eidolon_drift.integrations.master": "Главный переключатель: %s",
+  "command.eidolon_drift.integrations.active": "%s (%s) [%s]: активна",
+  "command.eidolon_drift.integrations.disabled": "%s (%s) [%s]: установлен, выключена в конфиге",
+  "command.eidolon_drift.integrations.absent": "%s (%s) [%s]: не установлен",
   "command.eidolon_drift.reload.success": "Конфигурация Eidolon Drift перезагружена.",
   "command.eidolon_drift.not_available": "Состояние Eidolon Drift пока недоступно.",
 

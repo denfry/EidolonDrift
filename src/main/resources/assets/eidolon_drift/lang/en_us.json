@@ -34,6 +34,11 @@
   "command.eidolon_drift.home.line": "anchor %s · zone %s³ · corruption %s",
   "command.eidolon_drift.home.cleared": "Cleared active client anomalies.",
   "command.eidolon_drift.no_target": "No target player; specify one (e.g. /eidolon status <player>).",
+  "command.eidolon_drift.integrations.header": "— Optional mod integrations —",
+  "command.eidolon_drift.integrations.master": "Master switch: %s",
+  "command.eidolon_drift.integrations.active": "%s (%s) [%s]: active",
+  "command.eidolon_drift.integrations.disabled": "%s (%s) [%s]: present, disabled in config",
+  "command.eidolon_drift.integrations.absent": "%s (%s) [%s]: not installed",
   "command.eidolon_drift.reload.success": "Eidolon Drift config reloaded.",
   "command.eidolon_drift.not_available": "Eidolon Drift state is not available yet.",
 

@@ -3,6 +3,9 @@ package com.denfry.eidolondrift.command;
 import java.util.Locale;
 import java.util.stream.Collectors;
 
+import com.denfry.eidolondrift.compat.Integration;
+import com.denfry.eidolondrift.compat.ModIntegrations;
+import com.denfry.eidolondrift.config.ModConfig;
 import com.denfry.eidolondrift.director.AnomalyDirector;
 import com.denfry.eidolondrift.director.AnomalyRegistry;
 import com.denfry.eidolondrift.memory.HomeMemory;
@@ -120,6 +123,7 @@ public final class EidolonCommand {
                                 .executes(c -> homeClear(c, self(c)))
                                 .then(Commands.argument("player", EntityArgument.player())
                                         .executes(c -> homeClear(c, EntityArgument.getPlayer(c, "player"))))))
+                .then(Commands.literal("integrations").executes(EidolonCommand::integrations))
                 .then(Commands.literal("reload").executes(EidolonCommand::reload)));
     }
 
@@ -262,6 +266,26 @@ public final class EidolonCommand {
         return 1;
     }
 
+    private static int integrations(CommandContext<CommandSourceStack> c) {
+        var src = c.getSource();
+        src.sendSuccess(() -> Component.translatable("command.eidolon_drift.integrations.header"), false);
+        boolean master = ModConfig.INTEGRATIONS_ENABLED.get();
+        src.sendSuccess(() -> Component.translatable("command.eidolon_drift.integrations.master",
+                state(master)), false);
+        for (Integration in : Integration.values()) {
+            boolean present = ModIntegrations.isPresent(in);
+            boolean active = ModIntegrations.isActive(in);
+            String key = !present
+                    ? "command.eidolon_drift.integrations.absent"
+                    : active
+                            ? "command.eidolon_drift.integrations.active"
+                            : "command.eidolon_drift.integrations.disabled";
+            src.sendSuccess(() -> Component.translatable(key,
+                    in.key, in.modId, in.category.name().toLowerCase(Locale.ROOT)), false);
+        }
+        return 1;
+    }
+
     private static int reload(CommandContext<CommandSourceStack> c) {
         c.getSource().sendSuccess(() -> Component.translatable("command.eidolon_drift.reload.success"), true);
         return 1;
@@ -303,5 +327,9 @@ public final class EidolonCommand {
 
     private static String f(float v) {
         return String.format(Locale.ROOT, "%.1f", v);
+    }
+
+    private static String state(boolean on) {
+        return on ? "on" : "off";
     }
 }

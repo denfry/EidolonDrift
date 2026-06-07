@@ -31,3 +31,57 @@ type = "required"
 versionRange = "${minecraft_version_range}"
 ordering = "NONE"
 side = "BOTH"
+
+# ── Optional integrations (soft dependencies) ────────────────────────────────
+# All "optional": the mod loads and runs fully without any of these. Each is detected at
+# runtime (compat/ModIntegrations) and gated by the [integrations] config section. "ordering =
+# AFTER" only nudges load order so detection sees them; it does NOT make them required.
+
+[[dependencies."${mod_id}"]]
+modId = "sound_physics_remastered"
+type = "optional"
+versionRange = ""
+ordering = "AFTER"
+side = "CLIENT"
+
+[[dependencies."${mod_id}"]]
+modId = "ambientsounds"
+type = "optional"
+versionRange = ""
+ordering = "AFTER"
+side = "CLIENT"
+
+[[dependencies."${mod_id}"]]
+modId = "dsurround"
+type = "optional"
+versionRange = ""
+ordering = "AFTER"
+side = "CLIENT"
+
+[[dependencies."${mod_id}"]]
+modId = "voicechat"
+type = "optional"
+versionRange = ""
+ordering = "AFTER"
+side = "BOTH"
+
+[[dependencies."${mod_id}"]]
+modId = "distanthorizons"
+type = "optional"
+versionRange = ""
+ordering = "AFTER"
+side = "CLIENT"
+
+[[dependencies."${mod_id}"]]
+modId = "terralith"
+type = "optional"
+versionRange = ""
+ordering = "AFTER"
+side = "BOTH"
+
+[[dependencies."${mod_id}"]]
+modId = "tectonic"
+type = "optional"
+versionRange = ""
+ordering = "AFTER"
+side = "BOTH"

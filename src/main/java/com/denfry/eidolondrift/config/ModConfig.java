@@ -63,6 +63,16 @@ public final class ModConfig {
     public static final ModConfigSpec.ConfigValue<List<? extends String>> DIMENSION_WHITELIST;
     public static final ModConfigSpec.ConfigValue<List<? extends String>> DIMENSION_BLACKLIST;
 
+    // ── integrations (soft dependencies; auto-detected, no-op when absent) ────
+    public static final ModConfigSpec.BooleanValue INTEGRATIONS_ENABLED;
+    public static final ModConfigSpec.BooleanValue INT_SOUND_PHYSICS;
+    public static final ModConfigSpec.BooleanValue INT_AMBIENT_SOUNDS;
+    public static final ModConfigSpec.BooleanValue INT_DYNAMIC_SURROUNDINGS;
+    public static final ModConfigSpec.BooleanValue INT_SIMPLE_VOICE_CHAT;
+    public static final ModConfigSpec.BooleanValue INT_DISTANT_HORIZONS;
+    public static final ModConfigSpec.BooleanValue INT_TERRALITH;
+    public static final ModConfigSpec.BooleanValue INT_TECTONIC;
+
     static {
         ModConfigSpec.Builder b = new ModConfigSpec.Builder();
 
@@ -132,6 +142,29 @@ public final class ModConfig {
         DIMENSION_BLACKLIST = b.comment("Dimensions where the mod is fully disabled.")
                 .defineListAllowEmpty("dimension_blacklist", List.of(),
                         () -> "minecraft:the_end", o -> o instanceof String);
+        b.pop();
+
+        // Optional integrations with realism/immersion mods. All soft: each is auto-detected at
+        // load and does nothing unless the partner mod is present. Per-mod toggles let server admins
+        // opt out even when the mod is installed. Behaviour is wired in later milestones — these
+        // toggles already gate it so config stays stable. See `/eidolon integrations`.
+        b.push("integrations");
+        INTEGRATIONS_ENABLED = b.comment("Master switch for ALL optional mod integrations.")
+                .define("enabled", true);
+        INT_SOUND_PHYSICS = b.comment("Sound Physics Remastered: horror sounds gain reverb/occlusion.")
+                .define("sound_physics", true);
+        INT_AMBIENT_SOUNDS = b.comment("AmbientSounds: duck the ambient bed before an anomaly fires.")
+                .define("ambient_sounds", true);
+        INT_DYNAMIC_SURROUNDINGS = b.comment("Dynamic Surroundings: same ambient-ducking, alternate provider.")
+                .define("dynamic_surroundings", true);
+        INT_SIMPLE_VOICE_CHAT = b.comment("Simple Voice Chat: whisper anomalies as proximity voice when alone.")
+                .define("simple_voice_chat", true);
+        INT_DISTANT_HORIZONS = b.comment("Distant Horizons: feed far-view isolation; keep client anomalies LOD-safe.")
+                .define("distant_horizons", true);
+        INT_TERRALITH = b.comment("Terralith: unfamiliar biomes raise dread; deep terrain feeds caveResonance.")
+                .define("terralith", true);
+        INT_TECTONIC = b.comment("Tectonic: large lonely terrain amplifies isolation.")
+                .define("tectonic", true);
         b.pop();
 
         SPEC = b.build();
