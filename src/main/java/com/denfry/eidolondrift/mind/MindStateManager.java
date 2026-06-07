@@ -22,6 +22,9 @@ public final class MindStateManager {
     /** GDD §4: tick logic runs every 100 ticks (5 seconds). */
     public static final int TICK_PERIOD = 100;
 
+    /** Radius within which dwelling grows home corruption (mirrors {@code AnomalyContext.HOME_RADIUS}). */
+    private static final double HOME_RADIUS = 48.0;
+
     private static int counter = 0;
 
     private MindStateManager() {}
@@ -112,7 +115,19 @@ public final class MindStateManager {
             ms.sleepDebt = MindState.clamp(ms.sleepDebt + 1.5f);
         }
 
-        // 6. Distortion is DERIVED — recompute, never set directly.
+        // 6. Home corruption: the house "learns" while the player dwells near it (GDD §7).
+        //    Grows only once a home is logged (player has slept) and past the protected stage 0;
+        //    fades slowly when the player is away. Drives home-anomaly weighting + the fear profile.
+        if (mem.primaryBedPos.isPresent() && ms.progressionStage >= 1) {
+            double rate = ModConfig.HOME_CORRUPTION_RATE.get();
+            boolean nearHome = mem.primaryBedPos.get().distSqr(pos) <= HOME_RADIUS * HOME_RADIUS;
+            ms.homeCorruption = MindState.clamp(
+                    ms.homeCorruption + (nearHome ? (float) (0.08 * rate) : -0.02f));
+        }
+        // Keep the persisted memory view in step with the live driver (for /eidolon memory).
+        mem.homeCorruptionLevel = ms.homeCorruption;
+
+        // 7. Distortion is DERIVED — recompute, never set directly.
         ms.recomputeDistortion();
 
         ms.clampAll();

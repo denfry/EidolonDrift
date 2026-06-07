@@ -29,7 +29,13 @@
   "command.eidolon_drift.anomaly.list": "Зарегистрировано аномалий (%s): %s",
   "command.eidolon_drift.memory.header": "— Память мира —",
   "command.eidolon_drift.memory.line": "известных чанков %s · сон %s (день %s) · порча дома %s",
+  "command.eidolon_drift.home.header": "— Дом —",
+  "command.eidolon_drift.home.none": "Дом ещё не зафиксирован (игрок должен сначала поспать).",
+  "command.eidolon_drift.home.line": "якорь %s · зона %s³ · порча %s",
+  "command.eidolon_drift.home.cleared": "Активные клиентские аномалии очищены.",
   "command.eidolon_drift.no_target": "Нет цели; укажите игрока (например /eidolon status <player>).",
   "command.eidolon_drift.reload.success": "Конфигурация Eidolon Drift перезагружена.",
-  "command.eidolon_drift.not_available": "Состояние Eidolon Drift пока недоступно."
+  "command.eidolon_drift.not_available": "Состояние Eidolon Drift пока недоступно.",
+
+  "message.eidolon_drift.bed_refuses": "Что-то наблюдает."
 }

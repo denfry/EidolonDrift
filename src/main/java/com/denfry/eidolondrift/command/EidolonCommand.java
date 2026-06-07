@@ -5,9 +5,12 @@ import java.util.stream.Collectors;
 
 import com.denfry.eidolondrift.director.AnomalyDirector;
 import com.denfry.eidolondrift.director.AnomalyRegistry;
+import com.denfry.eidolondrift.memory.HomeMemory;
 import com.denfry.eidolondrift.memory.PlayerWorldMemory;
 import com.denfry.eidolondrift.mind.MindState;
 import com.denfry.eidolondrift.mind.MindStateManager;
+import com.denfry.eidolondrift.network.CancelClientAnomalyPayload;
+import com.denfry.eidolondrift.network.EidolonNetworking;
 import com.denfry.eidolondrift.observer.ObserverPhase;
 import com.denfry.eidolondrift.observer.ObserverSpawnManager;
 import com.mojang.brigadier.CommandDispatcher;
@@ -108,6 +111,15 @@ public final class EidolonCommand {
                                 .executes(c -> observerInfo(c, self(c)))
                                 .then(Commands.argument("player", EntityArgument.player())
                                         .executes(c -> observerInfo(c, EntityArgument.getPlayer(c, "player"))))))
+                .then(Commands.literal("home")
+                        .then(Commands.literal("info")
+                                .executes(c -> homeInfo(c, self(c)))
+                                .then(Commands.argument("player", EntityArgument.player())
+                                        .executes(c -> homeInfo(c, EntityArgument.getPlayer(c, "player")))))
+                        .then(Commands.literal("clear")
+                                .executes(c -> homeClear(c, self(c)))
+                                .then(Commands.argument("player", EntityArgument.player())
+                                        .executes(c -> homeClear(c, EntityArgument.getPlayer(c, "player"))))))
                 .then(Commands.literal("reload").executes(EidolonCommand::reload)));
     }
 
@@ -222,6 +234,31 @@ public final class EidolonCommand {
         if (p == null) return noTarget(c);
         String info = ObserverSpawnManager.debugInfo(p);
         c.getSource().sendSuccess(() -> Component.translatable("command.eidolon_drift.observer.info", info), false);
+        return 1;
+    }
+
+    private static int homeInfo(CommandContext<CommandSourceStack> c, ServerPlayer p) {
+        if (p == null) return noTarget(c);
+        PlayerWorldMemory mem = MindStateManager.memory(p);
+        MindState ms = MindStateManager.get(p);
+        var home = mem.home();
+        var src = c.getSource();
+        src.sendSuccess(() -> Component.translatable("command.eidolon_drift.home.header"), false);
+        if (!home.hasHome()) {
+            src.sendSuccess(() -> Component.translatable("command.eidolon_drift.home.none"), false);
+            return 1;
+        }
+        var anchor = home.anchor.get();
+        src.sendSuccess(() -> Component.translatable("command.eidolon_drift.home.line",
+                anchor.getX() + ", " + anchor.getY() + ", " + anchor.getZ(),
+                HomeMemory.HALF_EXTENT_XZ * 2 + 1, f(ms.homeCorruption)), false);
+        return 1;
+    }
+
+    private static int homeClear(CommandContext<CommandSourceStack> c, ServerPlayer p) {
+        if (p == null) return noTarget(c);
+        EidolonNetworking.sendToPlayer(p, CancelClientAnomalyPayload.all());
+        c.getSource().sendSuccess(() -> Component.translatable("command.eidolon_drift.home.cleared"), true);
         return 1;
     }
 

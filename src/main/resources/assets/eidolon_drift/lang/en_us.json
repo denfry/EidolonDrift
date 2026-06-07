@@ -29,7 +29,13 @@
   "command.eidolon_drift.anomaly.list": "Registered anomalies (%s): %s",
   "command.eidolon_drift.memory.header": "— World memory —",
   "command.eidolon_drift.memory.line": "known chunks %s · slept %s (day %s) · home corruption %s",
+  "command.eidolon_drift.home.header": "— Home —",
+  "command.eidolon_drift.home.none": "No home logged yet (the player must sleep first).",
+  "command.eidolon_drift.home.line": "anchor %s · zone %s³ · corruption %s",
+  "command.eidolon_drift.home.cleared": "Cleared active client anomalies.",
   "command.eidolon_drift.no_target": "No target player; specify one (e.g. /eidolon status <player>).",
   "command.eidolon_drift.reload.success": "Eidolon Drift config reloaded.",
-  "command.eidolon_drift.not_available": "Eidolon Drift state is not available yet."
+  "command.eidolon_drift.not_available": "Eidolon Drift state is not available yet.",
+
+  "message.eidolon_drift.bed_refuses": "Something is watching."
 }

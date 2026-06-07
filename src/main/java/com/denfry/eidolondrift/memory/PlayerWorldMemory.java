@@ -66,6 +66,14 @@ public class PlayerWorldMemory {
         return knownChunks.contains(new ChunkPos(pos).toLong());
     }
 
+    /**
+     * Derived view of the home zone (GDD §7). Anchored on {@link #primaryBedPos}, so it is
+     * rebuilt on demand and never serialized separately — corruption lives on the MindState.
+     */
+    public HomeMemory home() {
+        return new HomeMemory(primaryBedPos);
+    }
+
     /** Mark the chunk at {@code pos} as familiar, evicting the oldest if over cap. */
     public void markVisited(BlockPos pos) {
         long key = new ChunkPos(pos).toLong();

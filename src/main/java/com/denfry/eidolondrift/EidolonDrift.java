@@ -1,12 +1,14 @@
 package com.denfry.eidolondrift;
 
 import com.denfry.eidolondrift.anomaly.ModAnomalies;
+import com.denfry.eidolondrift.anomaly.world.BedRefusesSleepAnomaly;
 import com.denfry.eidolondrift.command.EidolonCommand;
 import com.denfry.eidolondrift.config.ModConfig;
 import com.denfry.eidolondrift.director.AnomalyDirector;
 import com.denfry.eidolondrift.mind.MindStateManager;
 import com.denfry.eidolondrift.network.EidolonNetworking;
 import com.denfry.eidolondrift.observer.ObserverSpawnManager;
+import com.denfry.eidolondrift.util.BlockRevertScheduler;
 import com.denfry.eidolondrift.util.SoundScheduler;
 import com.denfry.eidolondrift.registry.ModBlocks;
 import com.denfry.eidolondrift.registry.ModDataAttachments;
@@ -64,6 +66,8 @@ public class EidolonDrift {
         NeoForge.EVENT_BUS.register(AnomalyDirector.class);
         NeoForge.EVENT_BUS.register(SoundScheduler.class);
         NeoForge.EVENT_BUS.register(ObserverSpawnManager.class);
+        NeoForge.EVENT_BUS.register(BlockRevertScheduler.class);    // M3: revert gated home mutations
+        NeoForge.EVENT_BUS.register(BedRefusesSleepAnomaly.class);  // M3: sleep-refusal + logout disarm
 
         LOGGER.info("Eidolon Drift bootstrapped. The house is listening.");
     }

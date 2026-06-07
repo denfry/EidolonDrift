@@ -22,12 +22,21 @@ public final class EidolonNetworking {
 
     public static void registerPayloads(final RegisterPayloadHandlersEvent event) {
         final PayloadRegistrar registrar = event.registrar(PROTOCOL_VERSION);
-        // No payloads yet. Future (S2C only):
-        //   registrar.playToClient(TriggerClientAnomalyPayload.TYPE,
-        //                          TriggerClientAnomalyPayload.STREAM_CODEC,
-        //                          ClientAnomalyHandler::handle);
-        EidolonDrift.LOGGER.debug("Eidolon Drift network channel '{}' ready (no payloads yet).",
-                PROTOCOL_VERSION);
+
+        // S2C client-deception channel (M3 home visuals; reused by M4). The handler runs
+        // only on the physical client — the lambda body classloads the client handler
+        // lazily, so a dedicated server never touches client-only classes.
+        registrar.playToClient(TriggerClientAnomalyPayload.TYPE,
+                TriggerClientAnomalyPayload.STREAM_CODEC,
+                (payload, ctx) -> ctx.enqueueWork(() ->
+                        com.denfry.eidolondrift.client.ClientAnomalyHandler.trigger(payload)));
+        registrar.playToClient(CancelClientAnomalyPayload.TYPE,
+                CancelClientAnomalyPayload.STREAM_CODEC,
+                (payload, ctx) -> ctx.enqueueWork(() ->
+                        com.denfry.eidolondrift.client.ClientAnomalyHandler.cancel(payload)));
+
+        EidolonDrift.LOGGER.debug("Eidolon Drift network channel '{}' ready ({} S2C payloads).",
+                PROTOCOL_VERSION, 2);
     }
 
     /**
