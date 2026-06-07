@@ -55,6 +55,12 @@ neoForge {
             sourceSet(sourceSets.main)
         }
     }
+
+    // Put Minecraft + NeoForge on the test classpath and bootstrap the game for unit tests.
+    unitTest {
+        enable()
+        testedMod = mods."${mod_id}"
+    }
 }
 
 dependencies {

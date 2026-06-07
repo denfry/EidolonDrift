@@ -1,8 +1,12 @@
 package com.denfry.eidolondrift;
 
+import com.denfry.eidolondrift.anomaly.ModAnomalies;
 import com.denfry.eidolondrift.command.EidolonCommand;
 import com.denfry.eidolondrift.config.ModConfig;
+import com.denfry.eidolondrift.director.AnomalyDirector;
+import com.denfry.eidolondrift.mind.MindStateManager;
 import com.denfry.eidolondrift.network.EidolonNetworking;
+import com.denfry.eidolondrift.util.SoundScheduler;
 import com.denfry.eidolondrift.registry.ModBlocks;
 import com.denfry.eidolondrift.registry.ModDataAttachments;
 import com.denfry.eidolondrift.registry.ModEntities;
@@ -53,11 +57,17 @@ public class EidolonDrift {
         // Commands register on the game event bus, not the mod bus.
         NeoForge.EVENT_BUS.addListener(EidolonCommand::onRegisterCommands);
 
+        // Server-side systems listen on the game event bus.
+        NeoForge.EVENT_BUS.register(MindStateManager.class);
+        NeoForge.EVENT_BUS.register(AnomalyDirector.class);
+        NeoForge.EVENT_BUS.register(SoundScheduler.class);
+
         LOGGER.info("Eidolon Drift bootstrapped. The house is listening.");
     }
 
     private void commonSetup(final FMLCommonSetupEvent event) {
-        // Reserved for cross-registry wiring once systems land (Director, Echo, etc.).
+        // Anomalies self-register into the Director's registry (Director never imports them).
+        event.enqueueWork(ModAnomalies::bootstrap);
     }
 
     /**

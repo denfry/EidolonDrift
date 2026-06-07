@@ -1,8 +1,26 @@
 {
   "_comment": "Eidolon Drift — English (US). Every user-facing string lives here AND in ru_ru.json.",
 
+  "subtitles.eidolon_drift.step_behind": "Soft footsteps",
+  "subtitles.eidolon_drift.whisper": "Whispering",
+  "subtitles.eidolon_drift.distant_voice": "A distant voice",
+  "subtitles.eidolon_drift.house_creak": "The house settles",
+  "subtitles.eidolon_drift.cave_resonance": "The stone resonates",
+
   "command.eidolon_drift.status.header": "— Eidolon Drift status —",
   "command.eidolon_drift.status.stage": "Stage: %s",
+  "command.eidolon_drift.status.mind": "dread %s · suspicion %s · isolation %s · distortion %s",
+  "command.eidolon_drift.status.place": "routine %s · home %s · cave %s · sleepDebt %s",
+  "command.eidolon_drift.status.fear": "Fear: %s · habit %s · session %s/%s",
+  "command.eidolon_drift.set.success": "Set %s = %s",
+  "command.eidolon_drift.set.unknown": "Unknown field: %s",
+  "command.eidolon_drift.stage.success": "Stage set to %s",
+  "command.eidolon_drift.anomaly.fired": "Fired anomaly: %s",
+  "command.eidolon_drift.anomaly.unknown": "Unknown anomaly: %s",
+  "command.eidolon_drift.anomaly.list": "Registered anomalies (%s): %s",
+  "command.eidolon_drift.memory.header": "— World memory —",
+  "command.eidolon_drift.memory.line": "known chunks %s · slept %s (day %s) · home corruption %s",
+  "command.eidolon_drift.no_target": "No target player; specify one (e.g. /eidolon status <player>).",
   "command.eidolon_drift.reload.success": "Eidolon Drift config reloaded.",
   "command.eidolon_drift.not_available": "Eidolon Drift state is not available yet."
 }

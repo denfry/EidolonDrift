@@ -1,0 +1,22 @@
+{
+  "step_behind": {
+    "sounds": [{ "name": "eidolon_drift:ambient/step_behind", "volume": 0.8, "pitch": 1.0 }],
+    "subtitle": "subtitles.eidolon_drift.step_behind"
+  },
+  "whisper": {
+    "sounds": [{ "name": "eidolon_drift:ambient/whisper", "volume": 0.6 }],
+    "subtitle": "subtitles.eidolon_drift.whisper"
+  },
+  "distant_voice": {
+    "sounds": [{ "name": "eidolon_drift:ambient/distant_voice", "volume": 0.6, "attenuation_distance": 48 }],
+    "subtitle": "subtitles.eidolon_drift.distant_voice"
+  },
+  "house_creak": {
+    "sounds": [{ "name": "eidolon_drift:house/creak", "volume": 0.8, "pitch": 0.9 }],
+    "subtitle": "subtitles.eidolon_drift.house_creak"
+  },
+  "cave_resonance": {
+    "sounds": [{ "name": "eidolon_drift:cave/resonance", "volume": 0.7, "attenuation_distance": 24 }],
+    "subtitle": "subtitles.eidolon_drift.cave_resonance"
+  }
+}

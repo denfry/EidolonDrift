@@ -1,8 +1,26 @@
 {
   "_comment": "Eidolon Drift — Русский. Каждая строка дублируется здесь и в en_us.json.",
 
+  "subtitles.eidolon_drift.step_behind": "Тихие шаги",
+  "subtitles.eidolon_drift.whisper": "Шёпот",
+  "subtitles.eidolon_drift.distant_voice": "Далёкий голос",
+  "subtitles.eidolon_drift.house_creak": "Дом оседает",
+  "subtitles.eidolon_drift.cave_resonance": "Камень резонирует",
+
   "command.eidolon_drift.status.header": "— Состояние Eidolon Drift —",
   "command.eidolon_drift.status.stage": "Стадия: %s",
+  "command.eidolon_drift.status.mind": "тревога %s · подозрение %s · изоляция %s · искажение %s",
+  "command.eidolon_drift.status.place": "рутина %s · дом %s · пещера %s · недосып %s",
+  "command.eidolon_drift.status.fear": "Страх: %s · привычка %s · сессия %s/%s",
+  "command.eidolon_drift.set.success": "Установлено %s = %s",
+  "command.eidolon_drift.set.unknown": "Неизвестное поле: %s",
+  "command.eidolon_drift.stage.success": "Стадия установлена: %s",
+  "command.eidolon_drift.anomaly.fired": "Аномалия запущена: %s",
+  "command.eidolon_drift.anomaly.unknown": "Неизвестная аномалия: %s",
+  "command.eidolon_drift.anomaly.list": "Зарегистрировано аномалий (%s): %s",
+  "command.eidolon_drift.memory.header": "— Память мира —",
+  "command.eidolon_drift.memory.line": "известных чанков %s · сон %s (день %s) · порча дома %s",
+  "command.eidolon_drift.no_target": "Нет цели; укажите игрока (например /eidolon status <player>).",
   "command.eidolon_drift.reload.success": "Конфигурация Eidolon Drift перезагружена.",
   "command.eidolon_drift.not_available": "Состояние Eidolon Drift пока недоступно."
 }
