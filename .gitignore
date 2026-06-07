@@ -30,3 +30,10 @@ docs/_gdd_extracted.txt
 
 # Local Claude settings
 .claude/settings.local.json
+
+# Internal design / planning / agent docs — kept OUT of the public repo (spoilers).
+# These live locally only; do not commit them.
+/CLAUDE.md
+/AGENTS.md
+/docs/
+*.docx
